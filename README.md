@@ -61,7 +61,7 @@ Kondisi Data:
 - Terdapat ```User-ID``` yang memberikan rating sangat banyak, digunakan untuk testing collaborative filtering.
 
 ### Distribusi Usia Pengguna
-Mayoritas pengguna berada dalam rentang usia 20–40 tahun.
+Mayoritas pengguna berada dalam rentang usia 20-40 tahun.
 
 ### User Paling Aktif
 User-ID `11676` memberikan 13,602 rating – kandidat ideal untuk pengujian collaborative filtering.
@@ -82,7 +82,7 @@ Kolom ```Author``` dan ```Title``` yang kosong diisi dengan string kosong ('').
 - Handling Duplicates
 Data ```Books.csv``` dibersihkan dari duplikasi berdasarkan ```Title```.
 - Handling Outliers
-Usia pengguna dibatasi hanya pada rentang 5–90 tahun untuk menghindari data yang tidak wajar.
+Usia pengguna dibatasi hanya pada rentang 5-90 tahun untuk menghindari data yang tidak wajar.
 
 ---
 
