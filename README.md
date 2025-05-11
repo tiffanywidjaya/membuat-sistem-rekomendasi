@@ -32,6 +32,32 @@ Dataset terdiri dari:
 - **Users.csv** → User-ID, Age
 - **Ratings.csv** → User-ID, ISBN, Rating
 
+### 1. ```Books.csv```
+Jumlah Baris & Kolom:
+Baris: 225,290
+Kolom: 8
+Kondisi Data:
+- Terdapat beberapa nilai missing terutama pada kolom ```Author```, ```Publisher```, dan ```Year```.
+- Terdapat duplikat ISBN dan judul, namun data dibersihkan menggunakan ```.drop_duplicates()``` berdasarkan Title.
+- Tidak dilakukan outlier removal karena fokus pada informasi string.
+
+### 2. ```Users.csv```
+Jumlah Baris & Kolom:
+Baris: 278,858
+Kolom: 3
+Kondisi Data:
+- Terjadi **missing value** pada kolom ```Age```.
+- Tidak ditemukan duplikat ```User-ID```.
+
+### 3. ```Ratings.csv```
+Jumlah Baris & Kolom:
+Baris: 1,149,780
+Kolom: 3
+Kondisi Data:
+- Sebagian besar rating adalah eksplisit (0–10).
+- Tidak terdapat missing value.
+- Terdapat ```User-ID``` yang memberikan rating sangat banyak, digunakan untuk testing collaborative filtering.
+
 ### Distribusi Usia Pengguna
 Mayoritas pengguna berada dalam rentang usia 20–40 tahun.
 
@@ -48,6 +74,15 @@ ISBN `0971880107` mendapat 2,502 rating – buku paling sering dinilai.
 - Kolom `Title` dan `Author` digabung ke kolom `combined`.
 - Nilai kosong diisi dengan string kosong.
 - Sampling 5.000 buku unik dilakukan agar tidak kehabisan memori saat TF-IDF.
+- Handling Missing Value
+Kolom ```Age``` yang kosong dikonversi menggunakan ```pd.to_numeric(errors='coerce')``` dan di-drop jika tidak valid.
+Kolom ```Author``` dan ```Title``` yang kosong diisi dengan string kosong ('').
+- Handling Duplicates
+Data ```Books.csv``` dibersihkan dari duplikasi berdasarkan ```Title```.
+- Handling Outliers
+Usia pengguna dibatasi hanya pada rentang 5–90 tahun untuk menghindari data yang tidak wajar.
+
+---
 
 # Modeling - Content-Based Filtering
 
@@ -63,6 +98,12 @@ Pada pendekatan ini, sistem merekomendasikan buku yang memiliki kemiripan konten
 6. **Buat fungsi rekomendasi** berdasarkan input judul dari pengguna.
 
 ### Contoh Output – Content-Based Filtering
+
+### Ekstraksi Fitur TF-IDF
+- Kolom Title dan Author digabungkan menjadi combined.
+- Data diubah menjadi representasi TF-IDF vector menggunakan TfidfVectorizer.
+### Hitung Kemiripan
+- Kemiripan antar buku dihitung menggunakan cosine similarity antar vektor TF-IDF.
 
 Ketika pengguna memasukkan judul buku **"Lost Laysen"**, sistem merekomendasikan lima buku lain yang memiliki kemiripan dari segi konten, khususnya berdasarkan judul dan nama penulis.
 
@@ -89,6 +130,13 @@ Sistem hanya mengandalkan kemiripan kata dari judul dan penulis. Oleh karena itu
 
 # Modeling – Collaborative Filtering
 
+###Encode Label
+Menggunakan library surprise, data diubah ke format (User-ID, Title, Rating).
+###Split Data
+Data dibagi menjadi train: 80% dan test: 20%.
+###Pelatihan Model
+Model dilatih menggunakan algoritma SVD dari library surprise.
+
 Untuk pendekatan kedua, digunakan teknik **Collaborative Filtering** berbasis matrix factorization menggunakan algoritma **SVD (Singular Value Decomposition)** dari library `surprise`.
 
 Model ini mempelajari pola interaksi antara pengguna dan item berdasarkan rating historis, tanpa bergantung pada konten buku.
@@ -103,7 +151,6 @@ Model ini mempelajari pola interaksi antara pengguna dan item berdasarkan rating
 
 3. **Evaluasi Akurasi**  
    Model diuji menggunakan metrik RMSE (Root Mean Square Error) dan menghasilkan nilai: 3.5242
-
 
 4. **Fungsi Rekomendasi**  
 Fungsi `get_recommendations()` digunakan untuk menyarankan buku kepada user berdasarkan estimasi rating tertinggi.
@@ -134,6 +181,28 @@ Pengguna yang telah aktif memberikan rating, karena model ini memanfaatkan pola 
 | **Kelebihan**        | Cocok untuk user baru (cold-start)     | Rekomendasi lebih personal            |
 | **Kelemahan**        | Tidak mempertimbangkan minat user      | Tidak bisa digunakan untuk user baru  |
 | **Rekomendasi**      | Umum berdasarkan konten                | Spesifik ke masing-masing user        |
+
+---
+
+## Evaluasi
+- Metrik Evaluasi: RMSE
+- Untuk collaborative filtering, digunakan RMSE (Root Mean Square Error) sebagai metrik karena sesuai untuk regresi prediksi rating.
+- Hasil evaluasi: ```RMSE: 3.5242```
+
+### Hasil Evaluasi per Pendekatan
+| Pendekatan               | Evaluasi / Output                                                                 |
+|--------------------------|-----------------------------------------------------------------------------------|
+| Content-Based Filtering  | Memberikan rekomendasi buku berbasis kemiripan teks dari judul dan penulis.      |
+|                          | Namun hasil bisa tidak akurat jika konten teks tidak cukup representatif.        |
+| Collaborative Filtering  | RMSE: **3.5242**                                                                 |
+|                          | Memberikan rekomendasi yang lebih personal, cocok untuk pengguna aktif.          |
+
+### Kaitan dengan Business Understanding
+| Aspek                        | Penjelasan                                                                                      |
+|-----------------------------|-------------------------------------------------------------------------------------------------|
+| Problem Statement         | Terjawab. Sistem berhasil memberikan rekomendasi untuk membantu pengguna menemukan buku relevan.|
+| Goals                    | Tercapai. Sistem menghasilkan rekomendasi baik berbasis konten maupun preferensi pengguna.     |
+| Solusi yang Dirancang     | Bekerja. Pendekatan content-based dan collaborative terbukti mampu menyelesaikan tujuan proyek. |
 
 ---
 
