@@ -26,6 +26,9 @@ Sistem menggunakan:
 ---
 
 ## Data Understanding
+Sistem rekomendasi ini menggunakan 3 dataset utama yang bersumber dari Kaggle:
+
+Sumber data: [Books Dataset](https://www.kaggle.com/datasets/saurabhbagchi/books-dataset)
 
 Dataset terdiri dari:
 - **Books.csv** → ISBN, Title, Author, Year, Publisher
@@ -34,16 +37,15 @@ Dataset terdiri dari:
 
 ### 1. ```Books.csv```
 Jumlah Baris & Kolom:
-Baris: 225,290
-Kolom: 8
+Baris: 271.379
+Kolom: 5
 Kondisi Data:
-- Terdapat beberapa nilai missing terutama pada kolom ```Author```, ```Publisher```, dan ```Year```.
-- Terdapat duplikat ISBN dan judul, namun data dibersihkan menggunakan ```.drop_duplicates()``` berdasarkan Title.
-- Tidak dilakukan outlier removal karena fokus pada informasi string.
+- Terdapat beberapa nilai missing terutama pada kolom ```Year```.
+- Namun, karena kolom ```Year``` tidak digunakan dalam proses modeling, **outlier tidak dihapus secara eksplisit**, dan hanya dicatat sebagai bagian dari analisis data awal.
 
 ### 2. ```Users.csv```
 Jumlah Baris & Kolom:
-Baris: 278,858
+Baris: 278,859
 Kolom: 3
 Kondisi Data:
 - Terjadi **missing value** pada kolom ```Age```.
@@ -51,7 +53,7 @@ Kondisi Data:
 
 ### 3. ```Ratings.csv```
 Jumlah Baris & Kolom:
-Baris: 1,149,780
+Baris: 1,048,575
 Kolom: 3
 Kondisi Data:
 - Sebagian besar rating adalah eksplisit (0–10).
@@ -130,11 +132,11 @@ Sistem hanya mengandalkan kemiripan kata dari judul dan penulis. Oleh karena itu
 
 # Modeling – Collaborative Filtering
 
-###Encode Label
+### Encode Label
 Menggunakan library surprise, data diubah ke format (User-ID, Title, Rating).
-###Split Data
+### Split Data
 Data dibagi menjadi train: 80% dan test: 20%.
-###Pelatihan Model
+### Pelatihan Model
 Model dilatih menggunakan algoritma SVD dari library surprise.
 
 Untuk pendekatan kedua, digunakan teknik **Collaborative Filtering** berbasis matrix factorization menggunakan algoritma **SVD (Singular Value Decomposition)** dari library `surprise`.
