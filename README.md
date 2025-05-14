@@ -55,7 +55,7 @@ Kolom: 5
 ### 2. ```Users.csv```
 **Jumlah Baris & Kolom:**
 Baris: 278,859
-Kolom: 3
+Kolom: 2
 **Kondisi Data:**
 - Terjadi **missing value** pada kolom ```Age```.
 - Tidak ditemukan duplikat ```User-ID```.
