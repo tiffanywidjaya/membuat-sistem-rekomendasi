@@ -36,20 +36,34 @@ Dataset terdiri dari:
 - **Ratings.csv** → User-ID, ISBN, Rating
 
 ### 1. ```Books.csv```
-Jumlah Baris & Kolom:
+**Jumlah Baris & Kolom:**
 Baris: 271.379
 Kolom: 5
-Kondisi Data:
-- Terdapat beberapa nilai missing terutama pada kolom ```Year```.
-- Namun, karena kolom ```Year``` tidak digunakan dalam proses modeling, **outlier tidak dihapus secara eksplisit**, dan hanya dicatat sebagai bagian dari analisis data awal.
+**Kondisi data:**
+  - Terdapat missing value pada `Author`, `Publisher`, dan `Year`
+  - Ditemukan outlier pada `Year`, seperti nilai `0`, tahun < 1000 atau > 2025
+  - Beberapa duplikasi ditemukan pada `Title`, diatasi dengan `.drop_duplicates(subset='Title')`
+**Uraian fitur:**
+| Fitur              | Deskripsi                                       |
+|--------------------|-------------------------------------------------|
+| `ISBN`             | Kode buku unik (string)                         |
+| `Title`            | Judul buku                                      |
+| `Author`           | Penulis buku                                    |
+| `Year`             | Tahun terbit                                    |
+| `Publisher`        | Penerbit                                        |
 
 ### 2. ```Users.csv```
-Jumlah Baris & Kolom:
+**Jumlah Baris & Kolom:**
 Baris: 278,859
 Kolom: 3
-Kondisi Data:
+**Kondisi Data:**
 - Terjadi **missing value** pada kolom ```Age```.
 - Tidak ditemukan duplikat ```User-ID```.
+**Uraian fitur**:
+| Fitur      | Deskripsi                                      |
+|------------|------------------------------------------------|
+| `User-ID`  | ID unik pengguna                               |
+| `Age`      | Usia pengguna                                  |
 
 ### 3. ```Ratings.csv```
 Jumlah Baris & Kolom:
@@ -59,6 +73,12 @@ Kondisi Data:
 - Sebagian besar rating adalah eksplisit (0–10).
 - Tidak terdapat missing value.
 - Terdapat ```User-ID``` yang memberikan rating sangat banyak, digunakan untuk testing collaborative filtering.
+**Uraian fitur**:
+| Fitur      | Deskripsi                                      |
+|------------|------------------------------------------------|
+| `User-ID`  | ID unik pengguna                               |
+| `ISBN`     | Kode buku unik                                 |
+| `Rating`   | Nilai rating eksplisit (0–10)                  |
 
 ### Distribusi Usia Pengguna
 Mayoritas pengguna berada dalam rentang usia 20-40 tahun.
@@ -73,16 +93,22 @@ ISBN `0971880107` mendapat 2,502 rating – buku paling sering dinilai.
 
 ## Data Preparation
 
+### 1. Konversi Tipe Data
+- Kolom `Age` dikonversi ke numerik menggunakan `pd.to_numeric(errors='coerce')`
+
+### 2. Handling Duplicates
+- Duplikasi berdasarkan `Title` dihapus sebelum sampling menggunakan `.drop_duplicates(subset='Title')`
+
+### 3. Sampling Data
+- Dilakukan sampling 5.000 buku unik dari data `Books.csv` untuk content-based filtering agar efisien dan tidak overload RAM.
+
+### 4. Handling Missing Value
+- Nilai kosong pada kolom teks seperti `Author` dan `Title` diisi string kosong `''`
+- Kolom `Age` yang tidak valid atau kosong dihapus setelah konversi
 - Kolom `Title` dan `Author` digabung ke kolom `combined`.
 - Nilai kosong diisi dengan string kosong.
 - Sampling 5.000 buku unik dilakukan agar tidak kehabisan memori saat TF-IDF.
 - Handling Missing Value
-Kolom ```Age``` yang kosong dikonversi menggunakan ```pd.to_numeric(errors='coerce')``` dan di-drop jika tidak valid.
-Kolom ```Author``` dan ```Title``` yang kosong diisi dengan string kosong ('').
-- Handling Duplicates
-Data ```Books.csv``` dibersihkan dari duplikasi berdasarkan ```Title```.
-- Handling Outliers
-Usia pengguna dibatasi hanya pada rentang 5-90 tahun untuk menghindari data yang tidak wajar.
 
 ---
 
@@ -99,7 +125,11 @@ Pada pendekatan ini, sistem merekomendasikan buku yang memiliki kemiripan konten
 5. **Hitung kemiripan** antar buku dengan *cosine similarity*.
 6. **Buat fungsi rekomendasi** berdasarkan input judul dari pengguna.
 
-### Contoh Output – Content-Based Filtering
+## Contoh Output – Content-Based Filtering
+### Tahap Preparation
+- Kolom `Title` dan `Author` digabung menjadi `combined`
+- Vektorisasi menggunakan **TF-IDF**
+- Kemiripan dihitung menggunakan **cosine similarity**
 
 ### Ekstraksi Fitur TF-IDF
 - Kolom Title dan Author digabungkan menjadi combined.
@@ -108,7 +138,6 @@ Pada pendekatan ini, sistem merekomendasikan buku yang memiliki kemiripan konten
 - Kemiripan antar buku dihitung menggunakan cosine similarity antar vektor TF-IDF.
 
 Ketika pengguna memasukkan judul buku **"Lost Laysen"**, sistem merekomendasikan lima buku lain yang memiliki kemiripan dari segi konten, khususnya berdasarkan judul dan nama penulis.
-
 | Judul Buku                            | Penulis              |
 |---------------------------------------|-----------------------|
 | Firebug                               | Marianne Mitchell     |
@@ -132,8 +161,11 @@ Sistem hanya mengandalkan kemiripan kata dari judul dan penulis. Oleh karena itu
 
 # Modeling – Collaborative Filtering
 
+- Data diformat menjadi `(User-ID, Title, Rating)` menggunakan `Dataset.load_from_df`
+- Skala rating diset ke `(0–10)`
+- Data dibagi menjadi training 80% dan testing 20% menggunakan `train_test_split`
 ### Encode Label
-Menggunakan library surprise, data diubah ke format (User-ID, Title, Rating).
+.
 ### Split Data
 Data dibagi menjadi train: 80% dan test: 20%.
 ### Pelatihan Model
