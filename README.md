@@ -22,33 +22,31 @@ Maka dari itu, adanya sistem rekomendasi ini tidak hanya membantu pengguna menem
 - Format Referensi dapat mengacu pada penulisan sitasi [IEEE](https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf), [APA](https://www.mendeley.com/guides/apa-citation-guide/) atau secara umum seperti [di sini](https://penerbitdeepublish.com/menulis-buku-membuat-sitasi-dengan-mudah/)
 - Sumber yang bisa digunakan [Scholar](https://scholar.google.com/)
 
+---
+
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
-
-Menjelaskan pernyataan masalah:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- **Pengguna kesulitan menemukan produk yang relevan di antara ribuan pilihan pada platform e-commerce.** Banyaknya variasi produk yang tersedia menyebabkan pengguna harus menghabiskan waktu lebih lama untuk mencari produk yang sesuai.
+- **Pengguna cenderung melewatkan produk yang sebenarnya sesuai kebutuhan mereka karena keterbatasan navigasi dan tampilan.** Produk yang relevan bisa saja tidak muncul di halaman depan atau kategori yang sedang dijelajahi oleh user.
+- **_Platform e-commerce_ membutuhkan sistem yang dapat meningkatkan personalisasi untuk mempertahankan loyalitas pengguna dan meningkatkan konversi penjualan.**
 
 ### Goals
+- Membangun sistem rekomendasi yang mampu memberikan saran produk yang sesuai dengan preferensi pengguna.
+- Meningkatkan kenyamanan dan efisiensi pengalaman pengguna dalam mencari produk yang relevan.
+- Memberikan nilai tambah bagi platform e-commerce melalui personalisasi dan peningkatan keterlibatan pengguna.
 
-Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
+### Solution Approach
+Untuk mencapai tujuan di atas, digunakan dua pendekatan sistem rekomendasi:
 
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
+1. **Content-Based Filtering (CBF)**
+Menggunakan deskripsi produk sebagai fitur utama, model ini menganalisis kemiripan antar produk berdasarkan TF-IDF dan cosine similarity. Cocok untuk pengguna baru (cold-start), karena tidak membutuhkan data interaksi dari user lain.
+2. **Collaborative Filtering (CF)**
+Menggunakan data interaksi pengguna (riwayat pembelian) untuk merekomendasikan produk yang dibeli oleh user dengan pola yang mirip. Menggunakan pendekatan user-based dengan algoritma K-Nearest Neighbors dan cosine similarity untuk mengukur kedekatan antar user.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Approach” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
+Kedua pendekatan ini akan dievaluasi untuk melihat keefektifannya dalam konteks e-commerce dan membantu menjawab permasalahan yang telah diidentifikasi.
 
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
+---
 
 ## Data Understanding
 Paragraf awal bagian ini menjelaskan informasi mengenai jumlah data, kondisi data, dan informasi mengenai data yang digunakan. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
