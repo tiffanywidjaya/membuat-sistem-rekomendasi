@@ -17,11 +17,6 @@ Sumber: [Katadata Databoks - Shopee Dominasi E-Commerce 2023](https://databoks.k
 
 Maka dari itu, adanya sistem rekomendasi ini tidak hanya membantu pengguna menemukan produk yang sesuai minat mereka, namun juga menciptakan pengalaman belanja yang lebih personal dan efisien.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-- Format Referensi dapat mengacu pada penulisan sitasi [IEEE](https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf), [APA](https://www.mendeley.com/guides/apa-citation-guide/) atau secara umum seperti [di sini](https://penerbitdeepublish.com/menulis-buku-membuat-sitasi-dengan-mudah/)
-- Sumber yang bisa digunakan [Scholar](https://scholar.google.com/)
-
 ---
 
 ## Business Understanding
@@ -86,8 +81,6 @@ Beberapa hasil eksplorasi awal terhadap data:
 - **Distribusi Produk & Customer:**  
   - 4.338 customer unik  
   - 3.665 produk unik
- 
----
 
 Insight ini menjadi dasar penting dalam menentukan pendekatan sistem rekomendasi yang akan dibangun.
 
@@ -102,15 +95,11 @@ Transaksi yang merupakan retur ditandai dengan `InvoiceNo` yang diawali huruf "C
 
 **Alasan:** Retur bukan representasi preferensi sebenarnya, dan dapat mengganggu model dalam memahami pola pembelian user.
 
----
-
 ### 2. Menghapus Nilai Tidak Valid
 
 Baris data dengan `Quantity ≤ 0` dan `UnitPrice ≤ 0` dihapus karena dianggap tidak valid untuk transaksi pembelian.
 
 **Alasan:** Produk yang dibeli dalam jumlah negatif atau harga nol kemungkinan adalah error input atau transaksi tidak sah.
-
----
 
 ### 3. Menghapus Nilai Kosong (Missing Value)
 
@@ -118,13 +107,9 @@ Nilai kosong di kolom `CustomerID` dan `Description` dihapus karena dua kolom in
 - `CustomerID` digunakan dalam pendekatan **Collaborative Filtering**
 - `Description` digunakan dalam pendekatan **Content-Based Filtering**
 
----
-
 ### 4. Memfokuskan Data pada United Kingdom
 
 Berdasarkan hasil EDA, lebih dari 90% transaksi berasal dari **United Kingdom**. Maka, sistem rekomendasi difokuskan pada user dan produk dari negara ini untuk hasil yang lebih stabil dan representatif.
-
----
 
 ### 5. Data Preparation untuk Content-Based Filtering (CBF)
 
@@ -134,8 +119,6 @@ Berdasarkan hasil EDA, lebih dari 90% transaksi berasal dari **United Kingdom**.
 
 **Alasan:** TF-IDF efektif dalam merepresentasikan makna deskriptif produk. Cosine similarity digunakan untuk menghitung tingkat kemiripan antar produk.
 
----
-
 ### 6. Data Preparation untuk Collaborative Filtering (CF)
 
 - Data diubah menjadi matriks interaksi `CustomerID x StockCode` menggunakan pivot table
@@ -144,8 +127,6 @@ Berdasarkan hasil EDA, lebih dari 90% transaksi berasal dari **United Kingdom**.
 - Matriks digunakan untuk melatih model **K-Nearest Neighbors** dengan cosine similarity sebagai ukuran kemiripan antar user
 
 **Alasan:** Model CF memanfaatkan interaksi nyata antara user dan produk untuk memberikan rekomendasi yang dipersonalisasi berdasarkan pola perilaku user lain.
-
----
 
 ## Modeling
 
@@ -187,8 +168,6 @@ Kemudian, digunakan model **K-Nearest Neighbors (KNN)** untuk mencari user denga
 | 20725     | LUNCH BAG RED RETROSPOT              | 56   |
 | 22386     | JUMBO BAG PINK POLKADOT              | 53   |
 
----
-
 ### Perbandingan Pendekatan
 
 | Aspek                    | Content-Based Filtering      | Collaborative Filtering         |
@@ -207,12 +186,71 @@ Proyek ini membandingkan performa keduanya untuk memahami kekuatan dan keterbata
 ---
 
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Evaluasi dilakukan untuk mengukur seberapa relevan dan efektif sistem rekomendasi yang telah dibangun.  
+Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem rekomendasi:
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+### Metrik Evaluasi
+
+1. **Precision@K**  
+   Mengukur proporsi item yang relevan dalam top-K rekomendasi.
+   
+   \[
+   \text{Precision@K} = \frac{\text{Jumlah item relevan dalam Top-K}}{K}
+   \]
+
+2. **Recall@K**  
+   Mengukur seberapa banyak item relevan yang berhasil ditemukan dari seluruh item relevan yang tersedia.
+   
+   \[
+   \text{Recall@K} = \frac{\text{Jumlah item relevan dalam Top-K}}{\text{Jumlah item relevan yang sebenarnya}}
+   \]
+
+3. **F1-Score@K**  
+   Rata-rata harmonik dari precision dan recall. Berguna ketika kita ingin menyeimbangkan keduanya.
+   
+   \[
+   \text{F1@K} = 2 \times \frac{\text{Precision@K} \times \text{Recall@K}}{\text{Precision@K} + \text{Recall@K}}
+   \]
+
+4. **Mean Average Precision (MAP@K)**  
+   Mengukur rata-rata presisi kumulatif pada setiap posisi item relevan dalam top-K.
+   
+   \[
+   \text{MAP@K} = \frac{1}{|U|} \sum_{u \in U} \frac{1}{\min(|R_u|, K)} \sum_{k=1}^{K} P@k(u)
+   \]
+
+5. **NDCG@K (Normalized Discounted Cumulative Gain)**  
+   Mengukur relevansi item dalam hasil rekomendasi dengan memperhatikan posisinya.  
+   Item yang relevan di posisi awal mendapatkan skor lebih tinggi.
+   
+   \[
+   \text{NDCG@K} = \frac{DCG@K}{IDCG@K}
+   \quad\text{dengan}\quad
+   DCG@K = \sum_{i=1}^{K} \frac{rel_i}{\log_2(i+1)}
+   \]
+
+### Hasil Evaluasi
+
+| Model                | Precision@5 | Recall@5 | F1@5   | MAP@5  | NDCG@5 |
+|---------------------|-------------|----------|--------|--------|--------|
+| Content-Based (CBF) | 0.4         | 0.0011   | 0.0022 | 0.3333 | 0.5087 |
+| Collaborative (CF)  | 0.0         | 0.0      | 0.0    | 0.0    | 0.0    |
+
+### Interpretasi Hasil
+
+- **Content-Based Filtering** (CBF) menunjukkan performa stabil, dengan nilai precision dan NDCG yang cukup tinggi. Artinya, sistem mampu mengembalikan item yang mirip dan relevan secara semantik.
+- **Collaborative Filtering** (CF) gagal memberikan hasil yang relevan dalam kasus tertentu. Hal ini disebabkan oleh:
+  - User outlier (memiliki interaksi sangat banyak yang tidak mirip dengan user lain)
+  - Sparsity data yang tinggi → sulit menemukan tetangga relevan
+- Hasil ini tetap penting untuk ditampilkan karena merefleksikan **tantangan nyata dalam sistem rekomendasi**.
+
+### Kesesuaian dengan Problem dan Goals
+
+Sistem yang dibangun berhasil:
+- Menyediakan rekomendasi produk yang relevan (CBF)
+- Membuktikan bahwa pendekatan berbeda punya kelebihan di kondisi berbeda
+- Menjawab tantangan utama dalam problem statement, yaitu membantu pengguna menemukan produk yang sesuai secara efisien
 
 **---Ini adalah bagian akhir laporan---**
 
