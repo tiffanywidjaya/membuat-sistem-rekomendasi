@@ -193,42 +193,32 @@ Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem r
 ### Metrik Evaluasi
 
 1. **Precision@K**  
-   Mengukur proporsi item yang relevan dalam top-K rekomendasi.
-   
-   \[
-   \text{Precision@K} = \frac{\text{Jumlah item relevan dalam Top-K}}{K}
-   \]
+   Mengukur proporsi item yang relevan dalam top-K rekomendasi.  
+   **Rumus:**  
+   Precision@K = (Jumlah item relevan dalam Top-K) / K
 
 2. **Recall@K**  
-   Mengukur seberapa banyak item relevan yang berhasil ditemukan dari seluruh item relevan yang tersedia.
-   
-   \[
-   \text{Recall@K} = \frac{\text{Jumlah item relevan dalam Top-K}}{\text{Jumlah item relevan yang sebenarnya}}
-   \]
+   Mengukur seberapa banyak item relevan yang berhasil ditemukan dari seluruh item relevan yang tersedia.  
+   **Rumus:**  
+   Recall@K = (Jumlah item relevan dalam Top-K) / (Jumlah item relevan yang sebenarnya)
 
 3. **F1-Score@K**  
-   Rata-rata harmonik dari precision dan recall. Berguna ketika kita ingin menyeimbangkan keduanya.
-   
-   \[
-   \text{F1@K} = 2 \times \frac{\text{Precision@K} \times \text{Recall@K}}{\text{Precision@K} + \text{Recall@K}}
-   \]
+   Rata-rata harmonik dari precision dan recall. Berguna untuk menyeimbangkan kedua metrik.  
+   **Rumus:**  
+   F1@K = 2 × (Precision@K × Recall@K) / (Precision@K + Recall@K)
 
 4. **Mean Average Precision (MAP@K)**  
-   Mengukur rata-rata presisi kumulatif pada setiap posisi item relevan dalam top-K.
-   
-   \[
-   \text{MAP@K} = \frac{1}{|U|} \sum_{u \in U} \frac{1}{\min(|R_u|, K)} \sum_{k=1}^{K} P@k(u)
-   \]
+   Mengukur rata-rata presisi kumulatif pada setiap posisi item relevan dalam top-K.  
+   **Rumus (sederhana):**  
+   MAP@K = Rata-rata presisi pada posisi item relevan di semua user
 
 5. **NDCG@K (Normalized Discounted Cumulative Gain)**  
    Mengukur relevansi item dalam hasil rekomendasi dengan memperhatikan posisinya.  
-   Item yang relevan di posisi awal mendapatkan skor lebih tinggi.
-   
-   \[
-   \text{NDCG@K} = \frac{DCG@K}{IDCG@K}
-   \quad\text{dengan}\quad
-   DCG@K = \sum_{i=1}^{K} \frac{rel_i}{\log_2(i+1)}
-   \]
+   Item yang relevan di posisi awal akan mendapat skor lebih tinggi.  
+   **Rumus (sederhana):**  
+   NDCG@K = DCG@K / IDCG@K  
+   di mana DCG@K = Σ (rel_i / log2(i+1))
+
 
 ### Hasil Evaluasi
 
