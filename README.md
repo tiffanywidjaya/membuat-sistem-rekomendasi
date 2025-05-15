@@ -10,7 +10,7 @@ Contohnya, ketika pengguna mencari suatu produk, sistem dapat menyarankan produk
 Dengan meningkatnya penggunaan platform e-commerce seperti Shopee, Tokopedia, hingga Amazon, kebutuhan akan sistem rekomendasi yang cerdas dan adaptif menjadi semakin penting. Berdasarkan data dari Katadata (2023), Shopee mendominasi pasar e-commerce Asia Tenggara dengan total kunjungan mencapai **55,1 miliar**, diikuti oleh Lazada dan TikTok Shop.  
 Hal ini menunjukkan betapa kompetitifnya industri ini dan pentingnya menghadirkan pengalaman pengguna yang unggul, salah satunya melalui sistem rekomendasi yang personal.
 
-![Dominasi E-commerce Asia Tenggara](e-commerce-dengan-nilai-transaksi-bruto_gmv-terbesar-di-asia-tenggara-(2023).png)
+![Dominasi E-commerce Asia Tenggara](https://github.com/user-attachments/assets/4a1fdf3c-990e-43a5-bb55-b47c32982714)
 
 Sumber: [Katadata Databoks - Shopee Dominasi E-Commerce 2023](https://databoks.katadata.co.id/teknologi-telekomunikasi/statistik/66989de7b7168/shopee-dominasi-pasar-e-commerce-asia-tenggara-pada-2023)
 
