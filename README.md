@@ -1,6 +1,6 @@
 # Laporan Proyek Machine Learning - Tiffany Widjaya
 
-## Project Overview
+## _Project Overview_
 _E-commerce_ didefinisikan oleh Whinston dan Kalakota sebagai “proses pembelian dan pemasaran informasi, barang, dan jasa melalui jaringan komputer, yang utamanya menggunakan internet”. Namun, istilah ini juga sering digunakan dalam konteks yang lebih luas, termasuk pemanfaatan teknologi internet seperti e-mail dan intranet untuk bertukar informasi baik di dalam organisasi maupun dengan pihak eksternal (Abdul Hussein et al., 2021). Situs belanja daring memiliki peran yang sangat penting dalam kehidupan sehari-hari kita, terutama karena manusia di abad ke-21 cenderung sangat sibuk dan produktif. Mayoritas orang berbelanja secara online, terutama dalam situasi pandemi COVID-19, dan mereka sangat bergantung pada ulasan atau cuitan teks sebelum membeli sesuatu untuk diri mereka sendiri. Hal ini dapat dianggap sebagai bagian integral dari kebiasaan manusia masa kini (Das et al., 2021).
 
 Namun, permasalahan yang kerap muncul pada _platform e-commerce_ adalah sulitnya pengguna menemukan produk yang benar-benar relevan di antara ribuan bahkan jutaan pilihan yang tersedia. Kondisi ini menyebabkan pengguna harus menghabiskan lebih banyak waktu untuk mencari, atau bahkan meninggalkan platform karena kesulitan menemukan produk yang sesuai. Oleh karena itu, diperlukan sebuah sistem yang mampu memberikan rekomendasi secara otomatis dan personal, guna menyederhanakan proses pencarian dan meningkatkan kenyamanan dalam pengalaman berbelanja online.
