@@ -151,6 +151,19 @@ Kemudian, kemiripan antar produk dihitung menggunakan **cosine similarity**.
 | 84950G    | GREEN HOTTIE WHITE HEART              |
 | 84950R    | RED HOTTIE WHITE HEART                |
 
+#### Visualisasi Cosine Similarity antar Produk
+
+Untuk memahami bagaimana sistem mengenali kemiripan antar produk berdasarkan deskripsi, dilakukan visualisasi **cosine similarity** pada 10 produk acak.
+
+Gambar berikut menunjukkan **matriks kemiripan** antar produk berdasarkan nilai cosine similarity dari vektor TF-IDF:
+
+![Cosine Similarity antar Produk](https://github.com/user-attachments/assets/1a3be8b3-4f21-4bc1-b51f-2c6dda47debc)
+
+- Warna biru lebih gelap menunjukkan kemiripan yang lebih tinggi (mendekati 1).
+- Diagonal bernilai 1 karena setiap produk identik dengan dirinya sendiri.
+- Misalnya, produk dengan deskripsi yang mengandung kata "HEART" atau "PINK" memiliki kemiripan yang lebih tinggi.
+
+Visualisasi ini mendemonstrasikan bagaimana **Content-Based Filtering** memahami konteks teks deskripsi produk dan menghasilkan rekomendasi berbasis kemiripan semantik.
 
 ### 2. Collaborative Filtering (CF)
 
@@ -219,7 +232,6 @@ Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem r
    NDCG@K = DCG@K / IDCG@K  
    di mana DCG@K = Σ (rel_i / log2(i+1))
 
-
 ### Hasil Evaluasi
 
 | Model                | Precision@5 | Recall@5 | F1@5   | MAP@5  | NDCG@5 |
@@ -242,12 +254,6 @@ Sistem yang dibangun berhasil:
 - Membuktikan bahwa pendekatan berbeda punya kelebihan di kondisi berbeda
 - Menjawab tantangan utama dalam problem statement, yaitu membantu pengguna menemukan produk yang sesuai secara efisien
 
-**---Ini adalah bagian akhir laporan---**
-
 ## Daftar Pustaka
 - Abdul Hussien, F. T., Rahma, A. M. S., & Abdul Wahab, H. B. (2021). Recommendation Systems for E-commerce Systems: An Overview. *Journal of Physics: Conference Series, 1897*(1), 012024. https://doi.org/10.1088/1742-6596/1897/1/012024
 - Smutek, T., Kowalski, M., Ivashko, O., Chmura, R., & Sokołowska-Woźniak, J. (2024). A Graph-Based Recommendation System Leveraging Cosine Similarity for Enhanced Marketing Decisions. European Research Studies Journal, 27(Special Issue 2), 83–93.
-- 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
