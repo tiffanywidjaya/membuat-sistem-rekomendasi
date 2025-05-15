@@ -19,14 +19,14 @@ Maka dari itu, adanya sistem rekomendasi ini tidak hanya membantu pengguna menem
 
 ---
 
-## Business Understanding
+## _Business Understanding_
 
-### Problem Statements
+### _Problem Statements_
 - **Pengguna kesulitan menemukan produk yang relevan di antara ribuan pilihan pada platform e-commerce.** Banyaknya variasi produk yang tersedia menyebabkan pengguna harus menghabiskan waktu lebih lama untuk mencari produk yang sesuai.
 - **Pengguna cenderung melewatkan produk yang sebenarnya sesuai kebutuhan mereka karena keterbatasan navigasi dan tampilan.** Produk yang relevan bisa saja tidak muncul di halaman depan atau kategori yang sedang dijelajahi oleh user.
 - **_Platform e-commerce_ membutuhkan sistem yang dapat meningkatkan personalisasi untuk mempertahankan loyalitas pengguna dan meningkatkan konversi penjualan.**
 
-### Goals
+### _Goals_
 - Membangun sistem rekomendasi yang mampu memberikan saran produk yang sesuai dengan preferensi pengguna.
 - Meningkatkan kenyamanan dan efisiensi pengalaman pengguna dalam mencari produk yang relevan.
 - Memberikan nilai tambah bagi _platform e-commerce_ melalui personalisasi dan peningkatan keterlibatan pengguna.
@@ -199,7 +199,7 @@ Proyek ini membandingkan performa keduanya untuk memahami kekuatan dan keterbata
 
 ---
 
-_## Evaluation_
+## _Evaluation_
 
 Evaluasi dilakukan untuk mengukur seberapa relevan dan efektif sistem rekomendasi yang telah dibangun.  
 Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem rekomendasi:
