@@ -251,7 +251,7 @@ Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem r
 ### Visualisasi Perbandingan Evaluasi Model
 
 Grafik berikut menunjukkan perbandingan hasil evaluasi lima metrik utama antara model _Content-Based Filtering_ (CBF) dan _Collaborative Filtering_ (CF):
-![Perbandingan Evaluasi CBF vs CF]((https://github.com/user-attachments/assets/d27f72fc-11b1-4e00-a005-5fdd7fc248da))
+![Perbandingan Evaluasi CBF vs CF](https://github.com/user-attachments/assets/2e3931b5-25cf-4323-b566-c7acb4e8e17d)
 
 - CBF memiliki nilai _precision_ dan NDCG yang jauh lebih tinggi dibanding CF.
 - CF menghasilkan nilai 0 pada semua metrik karena tidak berhasil memberikan rekomendasi yang relevan pada _user outlier_.
