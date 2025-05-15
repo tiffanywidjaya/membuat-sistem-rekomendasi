@@ -49,31 +49,162 @@ Kedua pendekatan ini akan dievaluasi untuk melihat keefektifannya dalam konteks 
 ---
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai jumlah data, kondisi data, dan informasi mengenai data yang digunakan. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Dataset yang digunakan adalah data transaksi e-commerce dari situs retail online di kawasan Eropa, dengan fokus pada pelanggan dari United Kingdom.
+Dataset ini diperoleh dari platform [Kaggle - E-Commerce Data](https://www.kaggle.com/datasets/carrie1/ecommerce-data).
 
-Selanjutnya, uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Dataset berisi 541.909 baris dan 8 kolom yang mencatat informasi penjualan produk selama tahun 2010–2011. Setelah pembersihan data (cleaning), jumlah user unik yang digunakan adalah 4.338, dan jumlah produk unik adalah 3.665.
 
-Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+### Kondisi Data
+Beberapa kondisi data sebelum preprocessing:
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data beserta insight atau exploratory data analysis.
+- Terdapat nilai kosong (missing value) di kolom `CustomerID` dan `Description`
+- Terdapat transaksi dengan `Quantity` ≤ 0 dan `UnitPrice` ≤ 0
+- Terdapat transaksi retur (ditandai dengan `InvoiceNo` diawali "C")
+- Terdapat duplikat entri produk berdasarkan deskripsi (untuk kebutuhan CBF)
+
+Semua kondisi tersebut telah ditangani pada tahap **Data Preparation**.
+
+### Uraian Fitur
+
+| Fitur        | Tipe Data   | Deskripsi                                                                 |
+|--------------|-------------|--------------------------------------------------------------------------|
+| `InvoiceNo`  | object      | ID transaksi, jika diawali "C" berarti transaksi retur                  |
+| `StockCode`  | object      | Kode produk                                                              |
+| `Description`| object      | Nama atau deskripsi produk                                               |
+| `Quantity`   | integer     | Jumlah produk yang dibeli                                                |
+| `InvoiceDate`| datetime    | Tanggal dan waktu transaksi terjadi                                      |
+| `UnitPrice`  | float       | Harga satuan produk (dalam Poundsterling)                                |
+| `CustomerID` | float       | ID unik pelanggan                                                        |
+| `Country`    | object      | Negara asal transaksi                                                    |
+
+### Exploratory Data Analysis (EDA)
+
+Beberapa hasil eksplorasi awal terhadap data:
+
+- **Produk Terlaris:** Produk seperti `"WHITE HANGING HEART T-LIGHT HOLDER"` dan `"REGENCY CAKESTAND 3 TIER"` memiliki volume penjualan tinggi.
+- **Negara dengan Transaksi Terbanyak:** United Kingdom mendominasi transaksi, menjadikannya fokus utama sistem rekomendasi.
+- **Distribusi Produk & Customer:**  
+  - 4.338 customer unik  
+  - 3.665 produk unik
+ 
+---
+
+Insight ini menjadi dasar penting dalam menentukan pendekatan sistem rekomendasi yang akan dibangun.
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+Data preparation dilakukan untuk memastikan bahwa data yang digunakan bersih, valid, dan siap diproses oleh sistem rekomendasi. Semua tahapan dilakukan secara berurutan dan konsisten dengan notebook.
+
+
+### 1. Menghapus Transaksi Retur
+
+Transaksi yang merupakan retur ditandai dengan `InvoiceNo` yang diawali huruf "C". Data tersebut dihapus karena bukan merupakan pembelian aktual dan dapat memengaruhi kualitas sistem rekomendasi.
+
+**Alasan:** Retur bukan representasi preferensi sebenarnya, dan dapat mengganggu model dalam memahami pola pembelian user.
+
+---
+
+### 2. Menghapus Nilai Tidak Valid
+
+Baris data dengan `Quantity ≤ 0` dan `UnitPrice ≤ 0` dihapus karena dianggap tidak valid untuk transaksi pembelian.
+
+**Alasan:** Produk yang dibeli dalam jumlah negatif atau harga nol kemungkinan adalah error input atau transaksi tidak sah.
+
+---
+
+### 3. Menghapus Nilai Kosong (Missing Value)
+
+Nilai kosong di kolom `CustomerID` dan `Description` dihapus karena dua kolom ini sangat krusial:
+- `CustomerID` digunakan dalam pendekatan **Collaborative Filtering**
+- `Description` digunakan dalam pendekatan **Content-Based Filtering**
+
+---
+
+### 4. Memfokuskan Data pada United Kingdom
+
+Berdasarkan hasil EDA, lebih dari 90% transaksi berasal dari **United Kingdom**. Maka, sistem rekomendasi difokuskan pada user dan produk dari negara ini untuk hasil yang lebih stabil dan representatif.
+
+---
+
+### 5. Data Preparation untuk Content-Based Filtering (CBF)
+
+- Data produk dideduplikasi berdasarkan kolom `Description`
+- Kolom `Description` diubah menjadi vektor numerik menggunakan **TF-IDF (Term Frequency – Inverse Document Frequency)**
+- Similaritas antar produk dihitung menggunakan **cosine similarity**
+
+**Alasan:** TF-IDF efektif dalam merepresentasikan makna deskriptif produk. Cosine similarity digunakan untuk menghitung tingkat kemiripan antar produk.
+
+---
+
+### 6. Data Preparation untuk Collaborative Filtering (CF)
+
+- Data diubah menjadi matriks interaksi `CustomerID x StockCode` menggunakan pivot table
+- Nilai matriks diisi berdasarkan `Quantity`
+- Model CF tidak menggunakan rating eksplisit, melainkan menggunakan **implicit feedback** dari jumlah pembelian
+- Matriks digunakan untuk melatih model **K-Nearest Neighbors** dengan cosine similarity sebagai ukuran kemiripan antar user
+
+**Alasan:** Model CF memanfaatkan interaksi nyata antara user dan produk untuk memberikan rekomendasi yang dipersonalisasi berdasarkan pola perilaku user lain.
+
+---
 
 ## Modeling
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+Pada tahap ini, dibangun dua jenis sistem rekomendasi untuk menyelesaikan permasalahan dalam membantu pengguna menemukan produk yang relevan:
+
+1. **Content-Based Filtering (CBF)**
+2. **Collaborative Filtering (CF)**
+
+### 1. Content-Based Filtering (CBF)
+
+Pendekatan ini menggunakan kolom `Description` sebagai fitur utama.  
+Deskripsi produk diubah menjadi representasi numerik menggunakan **TF-IDF**.  
+Kemudian, kemiripan antar produk dihitung menggunakan **cosine similarity**.
+
+#### Contoh Top-5 Recommendation (Input: `"RED WOOLLY HOTTIE WHITE HEART."`)
+
+| StockCode | Description                           |
+|-----------|----------------------------------------|
+| 90123D    | WHITE HEART OF GLASS BRACELET         |
+| 23321     | SMALL WHITE HEART OF WICKER           |
+| 84950B    | BLUE HOTTIE WHITE HEART               |
+| 84950G    | GREEN HOTTIE WHITE HEART              |
+| 84950R    | RED HOTTIE WHITE HEART                |
+
+
+### 2. Collaborative Filtering (CF)
+
+Model ini menggunakan data interaksi user dengan produk.  
+Dibuat matriks `CustomerID x StockCode` berdasarkan jumlah pembelian (`Quantity`).  
+Kemudian, digunakan model **K-Nearest Neighbors (KNN)** untuk mencari user dengan pola belanja serupa dan merekomendasikan produk dari tetangganya.
+
+#### Contoh Top-5 Recommendation untuk user 12748.0:
+
+| StockCode | Description                          | Skor |
+|-----------|---------------------------------------|------|
+| 84947     | ANTIQUE SILVER TEA GLASS ENGRAVED    | 72   |
+| 21495     | WHITE HANGING HEART T-LIGHT HOLDER   | 65   |
+| 23358     | HOME BUILDING BLOCK WORD             | 59   |
+| 20725     | LUNCH BAG RED RETROSPOT              | 56   |
+| 22386     | JUMBO BAG PINK POLKADOT              | 53   |
+
+---
+
+### Perbandingan Pendekatan
+
+| Aspek                    | Content-Based Filtering      | Collaborative Filtering         |
+|-------------------------|------------------------------|----------------------------------|
+| Data yang dibutuhkan     | Deskripsi produk             | Riwayat interaksi user-produk    |
+| Kelebihan                | Tidak butuh data user lain (cocok untuk cold-start user) | Rekomendasi bersifat personal dan lebih kontekstual |
+| Kekurangan               | Kurang personal, bisa terbatas jika deskripsi kurang informatif | Tidak bisa memberi rekomendasi untuk user atau produk baru |
+| Output yang dihasilkan   | Produk serupa berdasarkan konten | Produk yang dibeli user serupa   |
+
+Kedua pendekatan ini saling melengkapi:
+- CBF unggul saat user atau produk baru ditambahkan
+- CF unggul saat data interaksi cukup kaya untuk mengenali pola
+
+Proyek ini membandingkan performa keduanya untuk memahami kekuatan dan keterbatasan masing-masing dalam konteks e-commerce.
+
+---
 
 ## Evaluation
 Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
