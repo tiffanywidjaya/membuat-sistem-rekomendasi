@@ -5,11 +5,11 @@ E-commerce didefinisikan oleh Whinston dan Kalakota sebagai “proses pembelian 
 
 Namun, permasalahan yang kerap muncul pada _platform e-commerce_ adalah sulitnya pengguna menemukan produk yang benar-benar relevan di antara ribuan bahkan jutaan pilihan yang tersedia. Kondisi ini menyebabkan pengguna harus menghabiskan lebih banyak waktu untuk mencari, atau bahkan meninggalkan platform karena kesulitan menemukan produk yang sesuai. Oleh karena itu, diperlukan sebuah sistem yang mampu memberikan rekomendasi secara otomatis dan personal, guna menyederhanakan proses pencarian dan meningkatkan kenyamanan dalam pengalaman berbelanja online.
 
-Sistem rekomendasi produk, atau yang sering disebut _recommendation engine_, adalah sebuah alat yang bertugas untuk menghasilkan dan memberikan saran produk kepada pengguna tertentu berdasarkan aktivitas dan preferensi mereka sebelumnya. Mekanisme ini memungkinkan sistem untuk memahami kebiasaan dan kebutuhan pengguna dengan lebih dalam, serta menganalisis perilaku mereka saat menjelajahi _website_ toko atau platform belanja online (Smutek et al., 2024). Contohnya, ketika pengguna mencari suatu produk, sistem dapat menyarankan produk lain yang mirip atau bahkan lebih sesuai dengan kebutuhan mereka. Hal ini dapat meningkatkan kepuasan pengguna, konversi penjualan, serta membangun loyalitas pelanggan terhadap platform.
+Sistem rekomendasi produk, atau yang sering disebut _recommendation engine_, adalah sebuah alat yang bertugas untuk menghasilkan dan memberikan saran produk kepada pengguna tertentu berdasarkan aktivitas dan preferensi mereka sebelumnya. Mekanisme ini memungkinkan sistem untuk memahami kebiasaan dan kebutuhan pengguna dengan lebih dalam, serta menganalisis perilaku mereka saat menjelajahi _website_ toko atau _platform_ belanja _online_ (Smutek et al., 2024). Contohnya, ketika pengguna mencari suatu produk, sistem dapat menyarankan produk lain yang mirip atau bahkan lebih sesuai dengan kebutuhan mereka. Hal ini dapat meningkatkan kepuasan pengguna, konversi penjualan, serta membangun loyalitas pelanggan terhadap _platform_.
 
-Menurut Abdul Hussien et al. (2021), sistem rekomendasi merupakan salah satu komponen utama dalam meningkatkan efisiensi, pengalaman pengguna, dan profitabilitas dalam sistem e-commerce modern. Pendekatan seperti Collaborative Filtering dan Content-Based Filtering terbukti mampu membantu pengguna dalam menghadapi masalah *information overload* dan mempercepat proses pengambilan keputusan saat berbelanja online.
+Menurut Abdul Hussien et al. (2021), sistem rekomendasi merupakan salah satu komponen utama dalam meningkatkan efisiensi, pengalaman pengguna, dan profitabilitas dalam sistem _e-commerce_ modern. Pendekatan seperti _Collaborative Filtering_ dan _Content-Based Filtering_ terbukti mampu membantu pengguna dalam menghadapi masalah *information overload* dan mempercepat proses pengambilan keputusan saat berbelanja _online_.
 
-Dengan meningkatnya penggunaan platform e-commerce seperti Shopee, Tokopedia, hingga Amazon, kebutuhan akan sistem rekomendasi yang cerdas dan adaptif menjadi semakin penting. Berdasarkan data dari Katadata (2023), Shopee mendominasi pasar e-commerce Asia Tenggara dengan total kunjungan mencapai **55,1 miliar**, diikuti oleh Lazada dan TikTok Shop. Hal ini menunjukkan betapa kompetitifnya industri ini dan pentingnya menghadirkan pengalaman pengguna yang unggul, salah satunya melalui sistem rekomendasi yang personal.
+Dengan meningkatnya penggunaan _platform e-commerce_ seperti Shopee, Tokopedia, hingga Amazon, kebutuhan akan sistem rekomendasi yang cerdas dan adaptif menjadi semakin penting. Berdasarkan data dari Katadata (2023), Shopee mendominasi pasar _e-commerce_ Asia Tenggara dengan total kunjungan mencapai **55,1 miliar**, diikuti oleh Lazada dan TikTok Shop. Hal ini menunjukkan betapa kompetitifnya industri ini dan pentingnya menghadirkan pengalaman pengguna yang unggul, salah satunya melalui sistem rekomendasi yang personal.
 
 ![Dominasi E-commerce Asia Tenggara](https://github.com/user-attachments/assets/4a1fdf3c-990e-43a5-bb55-b47c32982714)
 
@@ -29,35 +29,35 @@ Maka dari itu, adanya sistem rekomendasi ini tidak hanya membantu pengguna menem
 ### Goals
 - Membangun sistem rekomendasi yang mampu memberikan saran produk yang sesuai dengan preferensi pengguna.
 - Meningkatkan kenyamanan dan efisiensi pengalaman pengguna dalam mencari produk yang relevan.
-- Memberikan nilai tambah bagi platform e-commerce melalui personalisasi dan peningkatan keterlibatan pengguna.
+- Memberikan nilai tambah bagi _platform e-commerce_ melalui personalisasi dan peningkatan keterlibatan pengguna.
 
 ### Solution Approach
 Untuk mencapai tujuan di atas, digunakan dua pendekatan sistem rekomendasi:
 
-1. **Content-Based Filtering (CBF)**
-Menggunakan deskripsi produk sebagai fitur utama, model ini menganalisis kemiripan antar produk berdasarkan TF-IDF dan cosine similarity. Cocok untuk pengguna baru (cold-start), karena tidak membutuhkan data interaksi dari user lain.
-2. **Collaborative Filtering (CF)**
-Menggunakan data interaksi pengguna (riwayat pembelian) untuk merekomendasikan produk yang dibeli oleh user dengan pola yang mirip. Menggunakan pendekatan user-based dengan algoritma K-Nearest Neighbors dan cosine similarity untuk mengukur kedekatan antar user.
+1. **_Content-Based Filtering_ (CBF)**
+Menggunakan deskripsi produk sebagai fitur utama, model ini menganalisis kemiripan antar produk berdasarkan TF-IDF dan _cosine similarity_. Cocok untuk pengguna baru (_cold-start_), karena tidak membutuhkan data interaksi dari user lain.
+2. **_Collaborative Filtering_ (CF)**
+Menggunakan data interaksi pengguna (riwayat pembelian) untuk merekomendasikan produk yang dibeli oleh user dengan pola yang mirip. Menggunakan pendekatan _user-based_ dengan algoritma _K-Nearest Neighbors_ dan _cosine similarity_ untuk mengukur kedekatan antar _user_.
 
-Kedua pendekatan ini akan dievaluasi untuk melihat keefektifannya dalam konteks e-commerce dan membantu menjawab permasalahan yang telah diidentifikasi.
+Kedua pendekatan ini akan dievaluasi untuk melihat keefektifannya dalam konteks _e-commerce_ dan membantu menjawab permasalahan yang telah diidentifikasi.
 
 ---
 
-## Data Understanding
-Dataset yang digunakan adalah data transaksi e-commerce dari situs retail online di kawasan Eropa, dengan fokus pada pelanggan dari United Kingdom.
-Dataset ini diperoleh dari platform [Kaggle - E-Commerce Data](https://www.kaggle.com/datasets/carrie1/ecommerce-data).
+## _Data Understanding_
+_Dataset_ yang digunakan adalah data transaksi _e-commerce_ dari situs _retail online_ di kawasan Eropa, dengan fokus pada pelanggan dari United Kingdom.
+_Dataset_ ini diperoleh dari _platform_ [Kaggle - E-Commerce Data](https://www.kaggle.com/datasets/carrie1/ecommerce-data).
 
-Dataset berisi 541.909 baris dan 8 kolom yang mencatat informasi penjualan produk selama tahun 2010–2011. Setelah pembersihan data (cleaning), jumlah user unik yang digunakan adalah 4.338, dan jumlah produk unik adalah 3.665.
+_Dataset_ berisi 541.909 baris dan 8 kolom yang mencatat informasi penjualan produk selama tahun 2010–2011. Setelah pembersihan data (_cleaning_), jumlah _user_ unik yang digunakan adalah 4.338, dan jumlah produk unik adalah 3.665.
 
 ### Kondisi Data
-Beberapa kondisi data sebelum preprocessing:
+Beberapa kondisi data sebelum _preprocessing_:
 
-- Terdapat nilai kosong (missing value) di kolom `CustomerID` dan `Description`
+- Terdapat nilai kosong (_missing value_) di kolom `CustomerID` dan `Description`
 - Terdapat transaksi dengan `Quantity` ≤ 0 dan `UnitPrice` ≤ 0
 - Terdapat transaksi retur (ditandai dengan `InvoiceNo` diawali "C")
 - Terdapat duplikat entri produk berdasarkan deskripsi (untuk kebutuhan CBF)
 
-Semua kondisi tersebut telah ditangani pada tahap **Data Preparation**.
+Semua kondisi tersebut telah ditangani pada tahap **_Data Preparation_**.
 
 ### Uraian Fitur
 
@@ -72,36 +72,35 @@ Semua kondisi tersebut telah ditangani pada tahap **Data Preparation**.
 | `CustomerID` | float       | ID unik pelanggan                                                        |
 | `Country`    | object      | Negara asal transaksi                                                    |
 
-### Exploratory Data Analysis (EDA)
+### _Exploratory Data Analysis_ (EDA)
 
 Beberapa hasil eksplorasi awal terhadap data:
 
 - **Produk Terlaris:** Produk seperti `"WHITE HANGING HEART T-LIGHT HOLDER"` dan `"REGENCY CAKESTAND 3 TIER"` memiliki volume penjualan tinggi.
 - **Negara dengan Transaksi Terbanyak:** United Kingdom mendominasi transaksi, menjadikannya fokus utama sistem rekomendasi.
 - **Distribusi Produk & Customer:**  
-  - 4.338 customer unik  
+  - 4.338 _customer_ unik  
   - 3.665 produk unik
 
-Insight ini menjadi dasar penting dalam menentukan pendekatan sistem rekomendasi yang akan dibangun.
+_Insight_ ini menjadi dasar penting dalam menentukan pendekatan sistem rekomendasi yang akan dibangun.
 
-## Data Preparation
+## _Data Preparation_
 
-Data preparation dilakukan untuk memastikan bahwa data yang digunakan bersih, valid, dan siap diproses oleh sistem rekomendasi. Semua tahapan dilakukan secara berurutan dan konsisten dengan notebook.
-
+_Data preparation_ dilakukan untuk memastikan bahwa data yang digunakan bersih, valid, dan siap diproses oleh sistem rekomendasi. Semua tahapan dilakukan secara berurutan dan konsisten dengan _notebook_.
 
 ### 1. Menghapus Transaksi Retur
 
 Transaksi yang merupakan retur ditandai dengan `InvoiceNo` yang diawali huruf "C". Data tersebut dihapus karena bukan merupakan pembelian aktual dan dapat memengaruhi kualitas sistem rekomendasi.
 
-**Alasan:** Retur bukan representasi preferensi sebenarnya, dan dapat mengganggu model dalam memahami pola pembelian user.
+**Alasan:** Retur bukan representasi preferensi sebenarnya, dan dapat mengganggu model dalam memahami pola pembelian _user_.
 
 ### 2. Menghapus Nilai Tidak Valid
 
 Baris data dengan `Quantity ≤ 0` dan `UnitPrice ≤ 0` dihapus karena dianggap tidak valid untuk transaksi pembelian.
 
-**Alasan:** Produk yang dibeli dalam jumlah negatif atau harga nol kemungkinan adalah error input atau transaksi tidak sah.
+**Alasan:** Produk yang dibeli dalam jumlah negatif atau harga nol kemungkinan adalah _error input_ atau transaksi tidak sah.
 
-### 3. Menghapus Nilai Kosong (Missing Value)
+### 3. Menghapus Nilai Kosong (_Missing Value_)
 
 Nilai kosong di kolom `CustomerID` dan `Description` dihapus karena dua kolom ini sangat krusial:
 - `CustomerID` digunakan dalam pendekatan **Collaborative Filtering**
@@ -109,39 +108,42 @@ Nilai kosong di kolom `CustomerID` dan `Description` dihapus karena dua kolom in
 
 ### 4. Memfokuskan Data pada United Kingdom
 
-Berdasarkan hasil EDA, lebih dari 90% transaksi berasal dari **United Kingdom**. Maka, sistem rekomendasi difokuskan pada user dan produk dari negara ini untuk hasil yang lebih stabil dan representatif.
+Berdasarkan hasil EDA, lebih dari 90% transaksi berasal dari **United Kingdom**. Maka, sistem rekomendasi difokuskan pada _user_ dan produk dari negara ini untuk hasil yang lebih stabil dan representatif.
+![Grafik Transaksi dari Berbagai Negara](https://github.com/user-attachments/assets/4ad11aa1-6a72-4ab9-a6a0-6385ab542377)
 
-### 5. Data Preparation untuk Content-Based Filtering (CBF)
+
+### 5. _Data Preparation_ untuk _Content-Based Filtering_ (CBF)
 
 - Data produk dideduplikasi berdasarkan kolom `Description`
-- Kolom `Description` diubah menjadi vektor numerik menggunakan **TF-IDF (Term Frequency – Inverse Document Frequency)**
-- Similaritas antar produk dihitung menggunakan **cosine similarity**
+- Kolom `Description` diubah menjadi vektor numerik menggunakan **TF-IDF (_Term Frequency – Inverse Document Frequency_)**
+- Similaritas antar produk dihitung menggunakan **_cosine similarity_**
 
-**Alasan:** TF-IDF efektif dalam merepresentasikan makna deskriptif produk. Cosine similarity digunakan untuk menghitung tingkat kemiripan antar produk.
+**Alasan:** TF-IDF efektif dalam merepresentasikan makna deskriptif produk. _Cosine similarity_ digunakan untuk menghitung tingkat kemiripan antar produk.
 
-### 6. Data Preparation untuk Collaborative Filtering (CF)
+### 6. _Data Preparation_ untuk _Collaborative Filtering_ (CF)
 
-- Data diubah menjadi matriks interaksi `CustomerID x StockCode` menggunakan pivot table
+- Data diubah menjadi matriks interaksi `CustomerID x StockCode` menggunakan _pivot table_
 - Nilai matriks diisi berdasarkan `Quantity`
-- Model CF tidak menggunakan rating eksplisit, melainkan menggunakan **implicit feedback** dari jumlah pembelian
-- Matriks digunakan untuk melatih model **K-Nearest Neighbors** dengan cosine similarity sebagai ukuran kemiripan antar user
+- Model CF tidak menggunakan rating eksplisit, melainkan menggunakan **_implicit feedback_** dari jumlah pembelian
+- Matriks digunakan untuk melatih model **_K-Nearest Neighbors_** dengan _cosine similarity_ sebagai ukuran kemiripan antar _user_
 
-**Alasan:** Model CF memanfaatkan interaksi nyata antara user dan produk untuk memberikan rekomendasi yang dipersonalisasi berdasarkan pola perilaku user lain.
+**Alasan:** Model CF memanfaatkan interaksi nyata antara _user_ dan produk untuk memberikan rekomendasi yang dipersonalisasi berdasarkan pola perilaku user lain.
 
-## Modeling
+## _Modeling_
 
 Pada tahap ini, dibangun dua jenis sistem rekomendasi untuk menyelesaikan permasalahan dalam membantu pengguna menemukan produk yang relevan:
 
-1. **Content-Based Filtering (CBF)**
-2. **Collaborative Filtering (CF)**
+1. **_Content-Based Filtering_ (CBF)**
+2. **_Collaborative Filtering_ (CF)**
 
-### 1. Content-Based Filtering (CBF)
+### 1. _Content-Based Filtering_ (CBF)
+Teknik _Content-Based Filtering_ (CBF) merekomendasikan item berdasarkan konten yang sebelumnya telah dilihat atau disukai oleh pengguna dalam profil mereka. Tujuan utama dari CBF adalah menyarankan objek atau konten yang mirip dengan apa yang disukai pengguna di masa lalu (Nudrat et al., 2022).
 
 Pendekatan ini menggunakan kolom `Description` sebagai fitur utama.  
 Deskripsi produk diubah menjadi representasi numerik menggunakan **TF-IDF**.  
-Kemudian, kemiripan antar produk dihitung menggunakan **cosine similarity**.
+Kemudian, kemiripan antar produk dihitung menggunakan **_cosine similarity_**.
 
-#### Contoh Top-5 Recommendation (Input: `"RED WOOLLY HOTTIE WHITE HEART."`)
+#### Contoh _Top_-5 _Recommendation_ (Input: `"RED WOOLLY HOTTIE WHITE HEART."`)
 
 | StockCode | Description                           |
 |-----------|----------------------------------------|
@@ -151,11 +153,11 @@ Kemudian, kemiripan antar produk dihitung menggunakan **cosine similarity**.
 | 84950G    | GREEN HOTTIE WHITE HEART              |
 | 84950R    | RED HOTTIE WHITE HEART                |
 
-#### Visualisasi Cosine Similarity antar Produk
+#### Visualisasi _Cosine Similarity_ antar Produk
 
-Untuk memahami bagaimana sistem mengenali kemiripan antar produk berdasarkan deskripsi, dilakukan visualisasi **cosine similarity** pada 10 produk acak.
+Untuk memahami bagaimana sistem mengenali kemiripan antar produk berdasarkan deskripsi, dilakukan visualisasi **_cosine similarity_** pada 10 produk acak.
 
-Gambar berikut menunjukkan **matriks kemiripan** antar produk berdasarkan nilai cosine similarity dari vektor TF-IDF:
+Gambar berikut menunjukkan **matriks kemiripan** antar produk berdasarkan nilai _cosine similarity_ dari vektor TF-IDF:
 
 ![Cosine Similarity antar Produk](https://github.com/user-attachments/assets/1a3be8b3-4f21-4bc1-b51f-2c6dda47debc)
 
@@ -163,15 +165,14 @@ Gambar berikut menunjukkan **matriks kemiripan** antar produk berdasarkan nilai 
 - Diagonal bernilai 1 karena setiap produk identik dengan dirinya sendiri.
 - Misalnya, produk dengan deskripsi yang mengandung kata "HEART" atau "PINK" memiliki kemiripan yang lebih tinggi.
 
-Visualisasi ini mendemonstrasikan bagaimana **Content-Based Filtering** memahami konteks teks deskripsi produk dan menghasilkan rekomendasi berbasis kemiripan semantik.
+Visualisasi ini mendemonstrasikan bagaimana **_Content-Based Filtering_** memahami konteks teks deskripsi produk dan menghasilkan rekomendasi berbasis kemiripan semantik.
 
-### 2. Collaborative Filtering (CF)
+### 2. _Collaborative Filtering_ (CF)
+_Collaborative Filtering_ (CF) memprediksi item yang relevan dengan berkolaborasi berdasarkan minat pengguna lain yang memiliki kesamaan. Sebagai contoh, pengguna A menyukai film bergenre aksi, dan pengguna B juga menyukai _genre_ yang sama. Maka, film aksi yang telah ditonton dan diberi rating oleh pengguna A akan direkomendasikan kepada pengguna B, selama pengguna B belum menontonnya (Nudrat et al., 2022).
 
-Model ini menggunakan data interaksi user dengan produk.  
-Dibuat matriks `CustomerID x StockCode` berdasarkan jumlah pembelian (`Quantity`).  
-Kemudian, digunakan model **K-Nearest Neighbors (KNN)** untuk mencari user dengan pola belanja serupa dan merekomendasikan produk dari tetangganya.
+Model ini menggunakan data interaksi _user_ dengan produk. Dibuat matriks `CustomerID x StockCode` berdasarkan jumlah pembelian (`Quantity`). Kemudian, digunakan model **_K-Nearest Neighbors_ (KNN)** untuk mencari _user_ dengan pola belanja serupa dan merekomendasikan produk dari tetangganya.
 
-#### Contoh Top-5 Recommendation untuk user 12748.0:
+#### Contoh _Top_-5 _Recommendation_ untuk user 12748.0:
 
 | StockCode | Description                          | Skor |
 |-----------|---------------------------------------|------|
@@ -183,49 +184,49 @@ Kemudian, digunakan model **K-Nearest Neighbors (KNN)** untuk mencari user denga
 
 ### Perbandingan Pendekatan
 
-| Aspek                    | Content-Based Filtering      | Collaborative Filtering         |
+| Aspek                    | _Content-Based Filtering_      | _Collaborative Filtering_         |
 |-------------------------|------------------------------|----------------------------------|
-| Data yang dibutuhkan     | Deskripsi produk             | Riwayat interaksi user-produk    |
-| Kelebihan                | Tidak butuh data user lain (cocok untuk cold-start user) | Rekomendasi bersifat personal dan lebih kontekstual |
-| Kekurangan               | Kurang personal, bisa terbatas jika deskripsi kurang informatif | Tidak bisa memberi rekomendasi untuk user atau produk baru |
-| Output yang dihasilkan   | Produk serupa berdasarkan konten | Produk yang dibeli user serupa   |
+| Data yang dibutuhkan     | Deskripsi produk             | Riwayat interaksi _user_-produk    |
+| Kelebihan                | Tidak butuh data _user_ lain (cocok untuk _cold-start_ user) | Rekomendasi bersifat _personal_ dan lebih kontekstual |
+| Kekurangan               | Kurang personal, bisa terbatas jika deskripsi kurang informatif | Tidak bisa memberi rekomendasi untuk _user_ atau produk baru |
+| _Output_ yang dihasilkan   | Produk serupa berdasarkan konten | Produk yang dibeli _user_ serupa   |
 
 Kedua pendekatan ini saling melengkapi:
-- CBF unggul saat user atau produk baru ditambahkan
+- CBF unggul saat _user_ atau produk baru ditambahkan
 - CF unggul saat data interaksi cukup kaya untuk mengenali pola
 
-Proyek ini membandingkan performa keduanya untuk memahami kekuatan dan keterbatasan masing-masing dalam konteks e-commerce.
+Proyek ini membandingkan performa keduanya untuk memahami kekuatan dan keterbatasan masing-masing dalam konteks _e-commerce_.
 
 ---
 
-## Evaluation
+_## Evaluation_
 
 Evaluasi dilakukan untuk mengukur seberapa relevan dan efektif sistem rekomendasi yang telah dibangun.  
 Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem rekomendasi:
 
 ### Metrik Evaluasi
 
-1. **Precision@K**  
-   Mengukur proporsi item yang relevan dalam top-K rekomendasi.  
+1. **_Precision_@K**  
+   Mengukur proporsi _item_ yang relevan dalam top-K rekomendasi.  
    **Rumus:**  
-   Precision@K = (Jumlah item relevan dalam Top-K) / K
+   Precision@K = (Jumlah _item_ relevan dalam Top-K) / K
 
-2. **Recall@K**  
-   Mengukur seberapa banyak item relevan yang berhasil ditemukan dari seluruh item relevan yang tersedia.  
+2. **_Recall_@K**  
+   Mengukur seberapa banyak _item_ relevan yang berhasil ditemukan dari seluruh _item_ relevan yang tersedia.  
    **Rumus:**  
-   Recall@K = (Jumlah item relevan dalam Top-K) / (Jumlah item relevan yang sebenarnya)
+   Recall@K = (Jumlah _item_ relevan dalam Top-K) / (Jumlah _item_ relevan yang sebenarnya)
 
-3. **F1-Score@K**  
-   Rata-rata harmonik dari precision dan recall. Berguna untuk menyeimbangkan kedua metrik.  
+3. **F1-_Score_@K**  
+   Rata-rata harmonik dari _precision_ dan _recall_. Berguna untuk menyeimbangkan kedua metrik.  
    **Rumus:**  
-   F1@K = 2 × (Precision@K × Recall@K) / (Precision@K + Recall@K)
+   F1@K = 2 × (_Precision_@K × _Recall_@K) / (_Precision_@K + _Recall_@K)
 
-4. **Mean Average Precision (MAP@K)**  
+4. **_Mean Average Precision_ (MAP@K)**  
    Mengukur rata-rata presisi kumulatif pada setiap posisi item relevan dalam top-K.  
    **Rumus (sederhana):**  
    MAP@K = Rata-rata presisi pada posisi item relevan di semua user
 
-5. **NDCG@K (Normalized Discounted Cumulative Gain)**  
+5. **NDCG@K (_Normalized Discounted Cumulative Gain_)**  
    Mengukur relevansi item dalam hasil rekomendasi dengan memperhatikan posisinya.  
    Item yang relevan di posisi awal akan mendapat skor lebih tinggi.  
    **Rumus (sederhana):**  
@@ -234,26 +235,37 @@ Model dievaluasi menggunakan lima metrik utama yang umum digunakan pada sistem r
 
 ### Hasil Evaluasi
 
-| Model                | Precision@5 | Recall@5 | F1@5   | MAP@5  | NDCG@5 |
+| Model                | _Precision_@5 | _Recall_@5 | F1@5   | MAP@5  | NDCG@5 |
 |---------------------|-------------|----------|--------|--------|--------|
-| Content-Based (CBF) | 0.4         | 0.0011   | 0.0022 | 0.3333 | 0.5087 |
-| Collaborative (CF)  | 0.0         | 0.0      | 0.0    | 0.0    | 0.0    |
+| _Content-Based_ (CBF) | 0.4         | 0.0011   | 0.0022 | 0.3333 | 0.5087 |
+| _Collaborative_ (CF)  | 0.0         | 0.0      | 0.0    | 0.0    | 0.0    |
 
 ### Interpretasi Hasil
 
-- **Content-Based Filtering** (CBF) menunjukkan performa stabil, dengan nilai precision dan NDCG yang cukup tinggi. Artinya, sistem mampu mengembalikan item yang mirip dan relevan secara semantik.
-- **Collaborative Filtering** (CF) gagal memberikan hasil yang relevan dalam kasus tertentu. Hal ini disebabkan oleh:
-  - User outlier (memiliki interaksi sangat banyak yang tidak mirip dengan user lain)
-  - Sparsity data yang tinggi → sulit menemukan tetangga relevan
+- **_Content-Based Filtering_** (CBF) menunjukkan performa stabil, dengan nilai precision dan NDCG yang cukup tinggi. Artinya, sistem mampu mengembalikan _item_ yang mirip dan relevan secara semantik.
+- **_Collaborative Filtering_** (CF) gagal memberikan hasil yang relevan dalam kasus tertentu. Hal ini disebabkan oleh:
+  - _User outlier_ (memiliki interaksi sangat banyak yang tidak mirip dengan _user_ lain)
+  - _Sparsity_ data yang tinggi → sulit menemukan tetangga relevan
 - Hasil ini tetap penting untuk ditampilkan karena merefleksikan **tantangan nyata dalam sistem rekomendasi**.
 
-### Kesesuaian dengan Problem dan Goals
+### Visualisasi Perbandingan Evaluasi Model
+
+Grafik berikut menunjukkan perbandingan hasil evaluasi lima metrik utama antara model _Content-Based Filtering_ (CBF) dan _Collaborative Filtering_ (CF):
+![Perbandingan Evaluasi CBF vs CF]((https://github.com/user-attachments/assets/d27f72fc-11b1-4e00-a005-5fdd7fc248da))
+
+- CBF memiliki nilai _precision_ dan NDCG yang jauh lebih tinggi dibanding CF.
+- CF menghasilkan nilai 0 pada semua metrik karena tidak berhasil memberikan rekomendasi yang relevan pada _user outlier_.
+- Visualisasi ini memperjelas perbedaan performa kedua model dalam konteks _dataset_ yang digunakan.
+
+### Kesesuaian dengan _Problem_ dan _Goals_
 
 Sistem yang dibangun berhasil:
 - Menyediakan rekomendasi produk yang relevan (CBF)
 - Membuktikan bahwa pendekatan berbeda punya kelebihan di kondisi berbeda
-- Menjawab tantangan utama dalam problem statement, yaitu membantu pengguna menemukan produk yang sesuai secara efisien
+- Menjawab tantangan utama dalam _problem statement_, yaitu membantu pengguna menemukan produk yang sesuai secara efisien
 
 ## Daftar Pustaka
 - Abdul Hussien, F. T., Rahma, A. M. S., & Abdul Wahab, H. B. (2021). Recommendation Systems for E-commerce Systems: An Overview. *Journal of Physics: Conference Series, 1897*(1), 012024. https://doi.org/10.1088/1742-6596/1897/1/012024
 - Smutek, T., Kowalski, M., Ivashko, O., Chmura, R., & Sokołowska-Woźniak, J. (2024). A Graph-Based Recommendation System Leveraging Cosine Similarity for Enhanced Marketing Decisions. European Research Studies Journal, 27(Special Issue 2), 83–93.
+- Nudrat, S., Khan, H. U., Iqbal, S., Talha, M. M., Alarfaj, F. K., & Almusallam, N. (2022). Users’ rating predictions using collaborating filtering based on users and items similarity measures. Computational Intelligence and Neuroscience, 2022, Article ID 2347641. https://doi.org/10.1155/2022/2347641
+- Katadata. (2023, Agustus 28). Shopee Dominasi Pasar E-Commerce Asia Tenggara pada 2023. *Databoks Katadata*. https://databoks.katadata.co.id/teknologi-telekomunikasi/statistik/66989de7b7168/shopee-dominasi-pasar-e-commerce-asia-tenggara-pada-2023
