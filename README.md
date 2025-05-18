@@ -31,7 +31,7 @@ Maka dari itu, adanya sistem rekomendasi ini tidak hanya membantu pengguna menem
 - Meningkatkan kenyamanan dan efisiensi pengalaman pengguna dalam mencari produk yang relevan.
 - Memberikan nilai tambah bagi _platform e-commerce_ melalui personalisasi dan peningkatan keterlibatan pengguna.
 
-### Solution Approach
+### _Solution Approach_
 Untuk mencapai tujuan di atas, digunakan dua pendekatan sistem rekomendasi:
 
 1. **_Content-Based Filtering_ (CBF)**
@@ -56,6 +56,15 @@ Beberapa kondisi data sebelum _preprocessing_:
 - Terdapat transaksi dengan `Quantity` ≤ 0 dan `UnitPrice` ≤ 0
 - Terdapat transaksi retur (ditandai dengan `InvoiceNo` diawali "C")
 - Terdapat duplikat entri produk berdasarkan deskripsi (untuk kebutuhan CBF)
+
+![Hasil Pemeriksaan Awal _Dataset_](https://github.com/user-attachments/assets/3fba33f7-4edc-479a-9b88-79af84e7a86b)
+
+- Jumlah nilai kosong:  
+  - Kolom `CustomerID`: 135080  
+  - Kolom `Description`: 1454  
+- Jumlah baris duplikat: 5268
+- Nilai minimum `Quantity`: -80995  
+- Nilai minimum `UnitPrice`: -11062.06  
 
 Semua kondisi tersebut telah ditangani pada tahap **_Data Preparation_**.
 
